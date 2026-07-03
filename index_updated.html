@@ -1,0 +1,1988 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="keywords"
+      content="color palette generator, AI color palette, extract colors from image, mood-based colors, theme color schemes, text to color palette, mobile color tool, hex code generator, adjust color saturation, color brightness tool"
+    />
+    <meta
+      name="description"
+      content="Create perfect color palettes from images, moods, themes, or text with our AI-powered color generator. Adjust hue, saturation, and brightness on any device."
+    />
+
+    <meta
+      property="og:title"
+      content="AI Color Palette Generator | Create Perfect Color Schemes"
+    />
+    <meta
+      property="og:description"
+      content="Generate custom color combinations from any input - photos, emotions, themes, or text. Fine-tune with hue, saturation and brightness controls."
+    />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Color Palette Generator | Create Perfect Color Schemes"
+    />
+    <meta
+      name="twitter:description"
+      content="Generate custom color combinations from any input - photos, emotions, themes, or text."
+    />
+
+    <title>🎨 AI Color Palette Generator Premium</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --bg1: #667eea;
+        --bg2: #764ba2;
+        --bg3: #f093fb;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --white: #ffffff;
+        --card: rgba(255, 255, 255, 0.95);
+        --glass: rgba(255, 255, 255, 0.82);
+        --line: #e5e7eb;
+        --ok: #22c55e;
+        --warn: #f59e0b;
+        --dark: #0f172a;
+        --soft: #f8fafc;
+        --shadow-sm: 0 4px 14px rgba(15, 23, 42, 0.08);
+        --shadow-md: 0 12px 30px rgba(15, 23, 42, 0.12);
+        --shadow-lg: 0 20px 60px rgba(15, 23, 42, 0.16);
+        --radius: 22px;
+        --gradient: linear-gradient(
+          135deg,
+          var(--bg1),
+          var(--bg2) 55%,
+          var(--bg3)
+        );
+      }
+
+      body {
+        font-family:
+          Inter,
+          Segoe UI,
+          Roboto,
+          Arial,
+          sans-serif;
+        color: var(--text);
+        min-height: 100vh;
+        background: linear-gradient(
+          135deg,
+          #667eea 0%,
+          #764ba2 45%,
+          #f093fb 100%
+        );
+        background-attachment: fixed;
+        padding: 18px;
+      }
+
+      .page {
+        max-width: 1380px;
+        margin: 0 auto;
+      }
+
+      .admin-fab {
+        position: fixed;
+        right: 18px;
+        top: 18px;
+        z-index: 60;
+        border: 0;
+        border-radius: 999px;
+        padding: 12px 18px;
+        background: rgba(17, 24, 39, 0.9);
+        color: #fff;
+        cursor: pointer;
+        box-shadow: var(--shadow-md);
+        font-weight: 700;
+      }
+
+      .hero {
+        text-align: center;
+        color: #fff;
+        margin: 18px 0 30px;
+        animation: fadeUp 0.5s ease;
+      }
+      .hero::after {
+        content: "";
+        display: block;
+        width: 180px;
+        height: 6px;
+        margin: 18px auto 0;
+        border-radius: 999px;
+        background: linear-gradient(
+          90deg,
+          #fff,
+          rgba(255, 255, 255, 0.2),
+          #fff
+        );
+        opacity: 0.8;
+      }
+
+      .hero-media {
+        width: min(100%, 980px);
+        height: 210px;
+        margin: 0 auto 24px;
+        border-radius: 26px;
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .hero-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: none;
+      }
+      .hero-placeholder {
+        font-size: 60px;
+        letter-spacing: 4px;
+        filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.25));
+      }
+
+      .hero h1 {
+        font-size: clamp(2rem, 5vw, 3.6rem);
+        line-height: 1.08;
+        margin-bottom: 12px;
+        font-weight: 900;
+        text-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+      }
+      .hero p {
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        max-width: 900px;
+        margin: 0 auto;
+        opacity: 0.96;
+      }
+
+      .ad-bar,
+      .panel,
+      .ad-box,
+      .resources,
+      .signup-section,
+      .footer-ad {
+        background: var(--glass);
+        backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: var(--radius);
+        box-shadow: 0 24px 70px rgba(15, 23, 42, 0.18);
+      }
+
+      .hero-media {
+        box-shadow: 0 24px 70px rgba(15, 23, 42, 0.18);
+      }
+
+      .ad-bar,
+      .footer-ad {
+        padding: 22px;
+        text-align: center;
+        margin-bottom: 24px;
+        border: 2px dashed #d1d5db;
+      }
+      .ad-box h4,
+      .ad-bar h3,
+      .footer-ad h3 {
+        margin-bottom: 8px;
+        color: #312e81;
+      }
+
+      .sponsored {
+        display: inline-block;
+        font-size: 0.76rem;
+        color: var(--muted);
+        margin-bottom: 8px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: 24px;
+      }
+
+      .panel {
+        padding: 26px;
+      }
+
+      .tabs {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .tab-btn {
+        border: 0;
+        cursor: pointer;
+        font-weight: 800;
+        padding: 15px 14px;
+        border-radius: 14px;
+        color: var(--text);
+        background: linear-gradient(180deg, #fff, #eef2ff);
+        box-shadow: var(--shadow-sm);
+        transition: 0.25s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .tab-btn::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.28),
+          rgba(255, 255, 255, 0)
+        );
+        opacity: 0;
+        transition: 0.25s;
+      }
+      .tab-btn:hover {
+        transform: translateY(-2px);
+      }
+      .tab-btn:hover::after {
+        opacity: 1;
+      }
+      .tab-btn.active {
+        background: var(--gradient);
+        color: #fff;
+      }
+
+      .tab-content {
+        display: none;
+      }
+      .tab-content.active {
+        display: block;
+        animation: fadeUp 0.3s ease;
+      }
+
+      .field {
+        margin-bottom: 18px;
+      }
+      .field label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 0.98rem;
+        font-weight: 800;
+      }
+      .field input[type="text"],
+      .field input[type="url"],
+      .field input[type="password"],
+      .field input[type="file"],
+      .field textarea {
+        width: 100%;
+        border: 2px solid var(--line);
+        border-radius: 14px;
+        padding: 14px 15px;
+        font-size: 1rem;
+        background: #fff;
+      }
+      .field textarea {
+        min-height: 110px;
+        resize: vertical;
+      }
+      .field input:focus,
+      .field textarea:focus {
+        outline: none;
+        border-color: var(--bg1);
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.12);
+      }
+
+      .pick-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 12px;
+      }
+      .pick {
+        border: 2px solid var(--line);
+        background: #fff;
+        padding: 14px 12px;
+        border-radius: 14px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: 0.25s ease;
+        box-shadow: var(--shadow-sm);
+      }
+      .pick:hover {
+        transform: translateY(-2px);
+        border-color: var(--bg1);
+      }
+      .pick.selected {
+        background: var(--gradient);
+        color: #fff;
+        border-color: transparent;
+      }
+
+      .primary-btn,
+      .ghost-btn,
+      .mini-btn {
+        border: 0;
+        border-radius: 14px;
+        cursor: pointer;
+        font-weight: 800;
+        transition: 0.25s ease;
+      }
+      .primary-btn {
+        width: 100%;
+        padding: 17px 20px;
+        color: #fff;
+        background: var(--gradient);
+        box-shadow: var(--shadow-md);
+        font-size: 1.05rem;
+        letter-spacing: 0.02em;
+      }
+      .primary-btn:hover,
+      .ghost-btn:hover,
+      .mini-btn:hover {
+        transform: translateY(-2px);
+      }
+      .ghost-btn {
+        background: #fff;
+        color: var(--text);
+        padding: 12px 16px;
+        border: 2px solid var(--line);
+      }
+      .mini-btn {
+        padding: 10px 14px;
+        color: #fff;
+        background: linear-gradient(135deg, #111827, #374151);
+        font-size: 0.92rem;
+      }
+
+      .palette-wrap {
+        margin-top: 26px;
+        display: none;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.98),
+          rgba(248, 250, 252, 0.96)
+        );
+        border: 1px solid #eef2f7;
+        border-radius: 22px;
+        padding: 24px;
+        box-shadow: var(--shadow-sm);
+      }
+      .palette-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 18px;
+        flex-wrap: wrap;
+      }
+      .palette-head h2 {
+        font-size: 1.55rem;
+      }
+
+      .palette-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+        gap: 16px;
+      }
+      .color-card {
+        background: #fff;
+        border: 1px solid rgba(102, 126, 234, 0.12);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+      }
+      .swatch {
+        height: 130px;
+        cursor: pointer;
+        position: relative;
+      }
+      .swatch::after {
+        content: "Click to copy";
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(17, 24, 39, 0.65);
+        color: #fff;
+        font-size: 0.72rem;
+        font-weight: 700;
+        backdrop-filter: blur(8px);
+      }
+      .color-meta {
+        padding: 14px;
+      }
+      .hex {
+        font-size: 1.1rem;
+        font-weight: 900;
+        margin-bottom: 10px;
+      }
+
+      .sliders {
+        margin-top: 12px;
+        display: grid;
+        gap: 10px;
+      }
+      .slider-row label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .slider-row input {
+        width: 100%;
+      }
+
+      .actions,
+      .download-actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+      .act-btn {
+        border: 0;
+        border-radius: 14px;
+        padding: 13px 16px;
+        cursor: pointer;
+        color: #fff;
+        font-weight: 800;
+        box-shadow: var(--shadow-sm);
+      }
+      .act1 {
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+      }
+      .act2 {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+      }
+      .act3 {
+        background: linear-gradient(135deg, #f59e0b, #ef4444);
+      }
+      .act4 {
+        background: linear-gradient(135deg, #0ea5e9, #2563eb);
+      }
+      .act5 {
+        background: linear-gradient(135deg, #ec4899, #8b5cf6);
+      }
+      .act6 {
+        background: linear-gradient(135deg, #10b981, #059669);
+      }
+      .act7 {
+        background: linear-gradient(135deg, #f97316, #f59e0b);
+      }
+
+      .sidebar {
+        display: grid;
+        gap: 18px;
+      }
+      .ad-box {
+        padding: 20px;
+        min-height: 220px;
+        text-align: center;
+        border: 2px dashed #d1d5db;
+      }
+
+      .resources {
+        margin-top: 24px;
+        padding: 26px;
+      }
+      .resources h2 {
+        margin-bottom: 18px;
+        font-size: 1.7rem;
+      }
+      .resource-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 14px;
+      }
+      .resource-card {
+        background: linear-gradient(180deg, #fff, #f8fbff);
+        border: 1px solid #eef2f7;
+        border-radius: 18px;
+        padding: 18px;
+        text-decoration: none;
+        color: inherit;
+        box-shadow: var(--shadow-sm);
+        transition: 0.25s ease;
+        display: block;
+      }
+      .resource-card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+      }
+      .resource-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+        color: #312e81;
+      }
+      .resource-card p {
+        color: var(--muted);
+      }
+      .badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 800;
+        color: #fff;
+        background: linear-gradient(135deg, #f59e0b, #ef4444);
+        margin-bottom: 10px;
+      }
+
+      .footer-ad {
+        margin-top: 24px;
+      }
+      .signup-section {
+        margin-top: 24px;
+        padding: 26px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(280px, 420px);
+        gap: 24px;
+        align-items: center;
+      }
+      .signup-copy h2 {
+        margin-bottom: 10px;
+        font-size: 1.8rem;
+        color: #312e81;
+      }
+      .signup-copy p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+      .subscriber-stats {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 14px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(99, 102, 241, 0.12);
+        color: #312e81;
+        font-weight: 700;
+      }
+      .signup-form {
+        display: grid;
+        gap: 14px;
+        padding: 20px;
+        border-radius: 20px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.94),
+          rgba(238, 242, 255, 0.9)
+        );
+        box-shadow: var(--shadow-sm);
+      }
+      .signup-note {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.6;
+      }
+      .signup-status {
+        min-height: 24px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        padding: 12px 14px;
+        border-radius: 14px;
+        display: none;
+      }
+      .signup-status.show {
+        display: block;
+      }
+      .signup-status.info {
+        color: #1d4ed8;
+        background: rgba(59, 130, 246, 0.12);
+      }
+      .signup-status.ok {
+        color: #166534;
+        background: rgba(34, 197, 94, 0.14);
+      }
+      .signup-status.error {
+        color: #991b1b;
+        background: rgba(239, 68, 68, 0.14);
+      }
+      .integration-card {
+        padding: 16px;
+        border-radius: 18px;
+        background: linear-gradient(180deg, #fff, #f8fbff);
+        border: 1px solid #e5e7eb;
+        box-shadow: var(--shadow-sm);
+      }
+      .config-code {
+        width: 100%;
+        min-height: 108px;
+        resize: vertical;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        white-space: pre-wrap;
+      }
+      footer {
+        color: #fff;
+        text-align: center;
+        padding: 26px 10px 10px;
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 18px;
+        right: 18px;
+        z-index: 80;
+        background: #111827;
+        color: #fff;
+        padding: 14px 18px;
+        border-radius: 14px;
+        box-shadow: var(--shadow-lg);
+        animation: fadeUp 0.25s ease;
+      }
+
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.55);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+        padding: 18px;
+      }
+      .modal.show {
+        display: flex;
+      }
+      .modal-card {
+        width: min(980px, 100%);
+        max-height: 92vh;
+        overflow: auto;
+        background: #fff;
+        border-radius: 22px;
+        box-shadow: var(--shadow-lg);
+        padding: 24px;
+      }
+      .modal-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      .admin-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .full {
+        grid-column: 1 / -1;
+      }
+      .hint {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-top: 6px;
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 1080px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .sidebar {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 760px) {
+        body {
+          padding: 10px;
+        }
+        .tabs {
+          grid-template-columns: 1fr 1fr;
+        }
+        .admin-grid {
+          grid-template-columns: 1fr;
+        }
+        .sidebar {
+          grid-template-columns: 1fr;
+        }
+        .hero-media {
+          height: 170px;
+        }
+        .signup-section {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 520px) {
+        .tabs {
+          grid-template-columns: 1fr;
+        }
+        .panel,
+        .resources {
+          padding: 18px;
+        }
+        .hero-placeholder {
+          font-size: 42px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button class="admin-fab" onclick="openAdminPanel()">⚙️ Admin Panel</button>
+
+    <div class="page">
+      <header class="hero">
+        <div class="hero-media">
+          <img id="heroImage" alt="Header image" />
+          <div class="hero-placeholder" id="heroPlaceholder">🎨 ✨ 🌈</div>
+        </div>
+        <h1 id="siteTitle">🎨 AI Color Palette Generator</h1>
+        <p id="siteSubtitle">
+          ✨ Create stunning color palettes from images, moods, themes, or text
+          with AI-powered precision.
+        </p>
+      </header>
+
+      <section class="ad-bar">
+        <div class="sponsored">Sponsored</div>
+        <h3 id="topAdTitle">🎯 Premium Design Tools</h3>
+        <p id="topAdText">Your advertisement or affiliate content here.</p>
+      </section>
+
+      <div class="layout">
+        <main class="panel">
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('image', this)">
+              📷 From Image
+            </button>
+            <button class="tab-btn" onclick="switchTab('mood', this)">
+              😊 From Mood
+            </button>
+            <button class="tab-btn" onclick="switchTab('theme', this)">
+              🎭 From Theme
+            </button>
+            <button class="tab-btn" onclick="switchTab('text', this)">
+              🔤 From Text / Hex
+            </button>
+          </div>
+
+          <section id="image-tab" class="tab-content active">
+            <div class="field">
+              <label>📤 Upload an image</label>
+              <input
+                type="file"
+                id="imageInput"
+                accept="image/*"
+                onchange="previewImage(this)"
+              />
+              <div class="hint">
+                Upload a photo and extract its dominant colors.
+              </div>
+            </div>
+            <canvas id="imageCanvas" style="display: none"></canvas>
+            <button class="primary-btn" onclick="generateFromImage()">
+              🎨 Extract Colors from Image
+            </button>
+          </section>
+
+          <section id="mood-tab" class="tab-content">
+            <div class="field">
+              <label>😊 Select a mood or emotion</label>
+              <div class="pick-grid" id="moodGrid">
+                <button class="pick" onclick="selectMood(this, 'calm')">
+                  🧘 Calm
+                </button>
+                <button class="pick" onclick="selectMood(this, 'energetic')">
+                  ⚡ Energetic
+                </button>
+                <button class="pick" onclick="selectMood(this, 'romantic')">
+                  💕 Romantic
+                </button>
+                <button class="pick" onclick="selectMood(this, 'professional')">
+                  💼 Professional
+                </button>
+                <button class="pick" onclick="selectMood(this, 'playful')">
+                  🎈 Playful
+                </button>
+                <button class="pick" onclick="selectMood(this, 'mysterious')">
+                  🌙 Mysterious
+                </button>
+                <button class="pick" onclick="selectMood(this, 'fresh')">
+                  🌿 Fresh
+                </button>
+                <button class="pick" onclick="selectMood(this, 'warm')">
+                  🔥 Warm
+                </button>
+                <button class="pick" onclick="selectMood(this, 'cool')">
+                  ❄️ Cool
+                </button>
+              </div>
+            </div>
+            <button class="primary-btn" onclick="generateFromMood()">
+              🎨 Generate Mood Palette
+            </button>
+          </section>
+
+          <section id="theme-tab" class="tab-content">
+            <div class="field">
+              <label>🎭 Choose a theme</label>
+              <div class="pick-grid" id="themeGrid">
+                <button class="pick" onclick="selectTheme(this, 'vintage')">
+                  📻 Vintage
+                </button>
+                <button class="pick" onclick="selectTheme(this, 'futuristic')">
+                  🚀 Futuristic
+                </button>
+                <button class="pick" onclick="selectTheme(this, 'minimalist')">
+                  ⚪ Minimalist
+                </button>
+                <button class="pick" onclick="selectTheme(this, 'nature')">
+                  🌳 Nature
+                </button>
+                <button class="pick" onclick="selectTheme(this, 'ocean')">
+                  🌊 Ocean
+                </button>
+                <button class="pick" onclick="selectTheme(this, 'sunset')">
+                  🌅 Sunset
+                </button>
+                <button class="pick" onclick="selectTheme(this, 'autumn')">
+                  🍂 Autumn
+                </button>
+                <button class="pick" onclick="selectTheme(this, 'corporate')">
+                  🏢 Corporate
+                </button>
+                <button class="pick" onclick="selectTheme(this, 'tropical')">
+                  🏝️ Tropical
+                </button>
+              </div>
+            </div>
+            <button class="primary-btn" onclick="generateFromTheme()">
+              🎨 Generate Theme Palette
+            </button>
+          </section>
+
+          <section id="text-tab" class="tab-content">
+            <div class="field">
+              <label>🔤 Enter words, names, or hex values</label>
+              <textarea
+                id="textInput"
+                placeholder="Examples: summer beach, calm luxury, #FF5733, #33FF57, #1E3A8A"
+              ></textarea>
+            </div>
+            <button class="primary-btn" onclick="generateFromText()">
+              🎨 Generate from Text / Hex
+            </button>
+          </section>
+
+          <section class="palette-wrap" id="paletteWrap">
+            <div class="palette-head">
+              <h2>🌈 Your Color Palette</h2>
+              <button class="ghost-btn" onclick="scrollToDownloads()">
+                📥 Jump to Downloads
+              </button>
+            </div>
+
+            <div class="palette-grid" id="paletteGrid"></div>
+
+            <div class="actions">
+              <button class="act-btn act1" onclick="savePaletteAsImage()">
+                💾 Save as Image
+              </button>
+              <button class="act-btn act2" onclick="copyAllColors()">
+                📋 Copy All Colors
+              </button>
+              <button class="act-btn act3" onclick="generateRandom()">
+                🎲 Randomize
+              </button>
+            </div>
+
+            <div id="downloads" style="margin-top: 22px">
+              <h3 style="margin-bottom: 12px">📥 Download Extracted Colors</h3>
+              <div class="download-actions">
+                <button class="act-btn act4" onclick="downloadColorsJSON()">
+                  📄 JSON
+                </button>
+                <button class="act-btn act5" onclick="downloadColorsCSS()">
+                  🎨 CSS
+                </button>
+                <button class="act-btn act6" onclick="downloadColorsSCSS()">
+                  💅 SCSS
+                </button>
+                <button class="act-btn act7" onclick="downloadColorsTXT()">
+                  📝 TXT
+                </button>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <aside class="sidebar">
+          <section class="ad-box">
+            <div class="sponsored">Sponsored</div>
+            <h4 id="sideAd1Title">🎯 Featured Tool</h4>
+            <p id="sideAd1Text">Your advertisement here.</p>
+          </section>
+          <section class="ad-box">
+            <div class="sponsored">Sponsored</div>
+            <h4 id="sideAd2Title">💎 Premium Resources</h4>
+            <p id="sideAd2Text">Your advertisement here.</p>
+          </section>
+        </aside>
+      </div>
+
+      <section class="resources">
+        <h2>🛠️ Recommended Resources & Tools</h2>
+        <div class="resource-grid" id="resourceGrid"></div>
+      </section>
+
+      <section class="signup-section">
+        <div class="signup-copy">
+          <div class="sponsored">Mailchimp + Netlify</div>
+          <h2>📬 Join the subscriber list</h2>
+        </div>
+
+        <form class="signup-form" onsubmit="subscribeEmail(event)">
+          <div class="field">
+            <label for="subscriberEmail">Email address</label>
+            <input
+              type="email"
+              id="subscriberEmail"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            />
+          </div>
+          <button class="primary-btn" type="submit" id="subscribeButton">
+            Subscribe
+          </button>
+          <p class="signup-note" id="signupHelperText">
+            No spam. Unsubscribe anytime.
+          </p>
+          <div class="signup-status" id="signupStatus" aria-live="polite"></div>
+        </form>
+      </section>
+
+      <section class="footer-ad">
+        <div class="sponsored">Sponsored</div>
+        <h3 id="bottomAdTitle">🎯 Special Offer</h3>
+        <p id="bottomAdText">Your advertisement or affiliate content here.</p>
+      </section>
+
+      <footer>
+        <p>Made with ❤️ for designers and creators</p>
+      </footer>
+    </div>
+
+    <div class="modal" id="adminModal">
+      <div class="modal-card">
+        <div class="modal-head">
+          <h2>⚙️ Admin Panel</h2>
+          <button class="ghost-btn" onclick="closeAdminPanel()">✖ Close</button>
+        </div>
+
+        <div id="adminLoginView">
+          <div class="admin-grid">
+            <div class="field">
+              <label>Admin username</label>
+              <input type="text" id="adminUser" placeholder="Enter username" />
+            </div>
+            <div class="field">
+              <label>Admin password</label>
+              <input
+                type="password"
+                id="adminPass"
+                placeholder="Enter password"
+              />
+            </div>
+            <div class="full">
+              <button class="primary-btn" onclick="adminLogin()">
+                🔐 Login
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="adminSettingsView" style="display: none">
+          <div class="admin-grid">
+            <div class="field">
+              <label>Website title</label>
+              <input type="text" id="cfgTitle" />
+            </div>
+            <div class="field">
+              <label>Website subtitle</label>
+              <input type="text" id="cfgSubtitle" />
+            </div>
+
+            <div class="field full">
+              <label>Header image URL</label>
+              <input
+                type="url"
+                id="cfgHeroImage"
+                placeholder="https://example.com/header.jpg"
+              />
+              <div class="hint">
+                Only the admin can change the header image here. Leave empty to
+                show the default emoji header.
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Top ad title</label>
+              <input type="text" id="cfgTopAdTitle" />
+            </div>
+            <div class="field">
+              <label>Top ad text</label>
+              <input type="text" id="cfgTopAdText" />
+            </div>
+
+            <div class="field">
+              <label>Sidebar ad 1 title</label>
+              <input type="text" id="cfgSide1Title" />
+            </div>
+            <div class="field">
+              <label>Sidebar ad 1 text</label>
+              <input type="text" id="cfgSide1Text" />
+            </div>
+
+            <div class="field">
+              <label>Sidebar ad 2 title</label>
+              <input type="text" id="cfgSide2Title" />
+            </div>
+            <div class="field">
+              <label>Sidebar ad 2 text</label>
+              <input type="text" id="cfgSide2Text" />
+            </div>
+
+            <div class="field">
+              <label>Bottom ad title</label>
+              <input type="text" id="cfgBottomTitle" />
+            </div>
+            <div class="field">
+              <label>Bottom ad text</label>
+              <input type="text" id="cfgBottomText" />
+            </div>
+
+            <div class="field full">
+              <label>Affiliate resources (JSON array)</label>
+              <textarea id="cfgResources"></textarea>
+              <div class="hint">
+                Each item should use: emoji, title, desc, url.
+              </div>
+            </div>
+            <div class="field full">
+              <label>Mailchimp Netlify endpoint</label>
+              <input
+                type="text"
+                id="cfgSubscriptionEndpoint"
+                placeholder="/.netlify/functions/mailchimp-subscribe"
+              />
+              <div class="hint">
+                Keep the browser talking only to your Netlify Function, never
+                directly to the Mailchimp API.
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Mailchimp audience label</label>
+              <input
+                type="text"
+                id="cfgMailchimpAudienceName"
+                placeholder="Design Newsletter"
+              />
+            </div>
+            <div class="field">
+              <label>Mailchimp signup tag</label>
+              <input
+                type="text"
+                id="cfgMailchimpTag"
+                placeholder="palette-site"
+              />
+            </div>
+
+            <div class="field full">
+              <label>Netlify environment variables</label>
+              <div class="integration-card">
+                <textarea
+                  id="cfgMailchimpEnv"
+                  class="config-code"
+                  readonly
+                ></textarea>
+                <div class="hint">
+                  Add these values in Netlify Site settings → Environment
+                  variables. Replace the placeholders with your real Mailchimp
+                  credentials after deployment.
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>New admin username</label>
+              <input type="text" id="cfgNewUser" />
+            </div>
+            <div class="field">
+              <label>New admin password</label>
+              <input type="password" id="cfgNewPass" />
+            </div>
+
+            <div
+              class="full"
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 12px;
+              "
+            >
+              <button class="primary-btn" onclick="saveAdminConfig()">
+                💾 Save Settings
+              </button>
+              <button class="ghost-btn" onclick="resetAdminConfig()">
+                ♻ Reset to Default
+              </button>
+              <button class="mini-btn" onclick="adminLogout()">
+                🚪 Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const defaultConfig = {
+        title: "🎨 AI Color Palette Generator",
+        subtitle:
+          "✨ Create stunning color palettes from images, moods, themes, or text with AI-powered precision.",
+        heroImage: "",
+        topAdTitle: "🎯 Premium Design Tools",
+        topAdText: "Your advertisement or affiliate content here.",
+        sideAd1Title: "🎯 Featured Tool",
+        sideAd1Text: "Your advertisement here.",
+        sideAd2Title: "💎 Premium Resources",
+        sideAd2Text: "Your advertisement here.",
+        bottomAdTitle: "🎯 Special Offer",
+        bottomAdText: "Your advertisement or affiliate content here.",
+        subscriptionEndpoint: "/.netlify/functions/mailchimp-subscribe",
+        mailchimpAudienceName: "YOUR_MAILCHIMP_AUDIENCE_NAME",
+        mailchimpTag: "palette-site",
+        mailchimpSuccessMessage:
+          "Thanks for subscribing. Please check your inbox to confirm your Mailchimp signup.",
+        adminUser: "admin",
+        adminPass: "palette123",
+        resources: [
+          {
+            emoji: "🎨",
+            title: "Pixlr",
+            desc: "AI-powered online photo editor for quick, professional edits",
+            url: "https://yazing.com/deals/pixlr/Softek",
+          },
+          {
+            emoji: "📊",
+            title: "Piktochart",
+            desc: "Create stunning infographics, reports, and visual content in minutes",
+            url: "https://yazing.com/deals/piktochart/Softek",
+          },
+          {
+            emoji: "🖼️",
+            title: "OpenArt",
+            desc: "AI art and image generation platform for creative projects",
+            url: "https://yazing.com/deals/openart/Softek",
+          },
+          {
+            emoji: "✏️",
+            title: "CorelDRAW",
+            desc: "Professional vector illustration and graphic design software",
+            url: "https://yazing.com/deals/coreldraw/Softek",
+          },
+          {
+            emoji: "🎬",
+            title: "Envato",
+            desc: "Millions of creative assets, templates, and design resources",
+            url: "https://yazing.com/deals/envato/Softek",
+          },
+          {
+            emoji: "📷",
+            title: "Photobucket",
+            desc: "Reliable photo and video hosting with easy sharing tools",
+            url: "https://yazing.com/deals/photobucket/Softek",
+          },
+          {
+            emoji: "🎥",
+            title: "InVideo",
+            desc: "AI-powered video creation tool for social media and marketing",
+            url: "https://yazing.com/deals/invideo/Softek",
+          },
+        ],
+      };
+
+      let config = loadConfig();
+
+      let currentPalette = [];
+      let basePalette = [];
+      let selectedMood = "";
+      let selectedTheme = "";
+      let isAdminLoggedIn = false;
+      let subscribeBusy = false;
+
+      const moodPalettes = {
+        calm: ["#B8D8D8", "#7A9E9F", "#4F6367", "#EEF5DB", "#84A59D"],
+        energetic: ["#FF6B35", "#F7931E", "#FDC830", "#37BEB0", "#F72585"],
+        romantic: ["#FFB3C6", "#FFC8DD", "#FFAFCC", "#BDE0FE", "#A2D2FF"],
+        professional: ["#1F3A5F", "#325D88", "#5E7A9A", "#98A8B8", "#D9E2EC"],
+        playful: ["#FF6F91", "#FF9671", "#FFC75F", "#F9F871", "#845EC2"],
+        mysterious: ["#2D132C", "#5C2E7E", "#801336", "#C72C41", "#EE4540"],
+        fresh: ["#06D6A0", "#1B9AAA", "#C5F9D7", "#A3F7BF", "#2EC4B6"],
+        warm: ["#FF6B6B", "#FFA07A", "#FFD166", "#F77F00", "#E76F51"],
+        cool: ["#00B4D8", "#48CAE4", "#90E0EF", "#0077B6", "#023E8A"],
+      };
+
+      const themePalettes = {
+        vintage: ["#D4A373", "#8B5E34", "#CD9777", "#E9C46A", "#A67C52"],
+        futuristic: ["#00F5D4", "#00BBF9", "#9B5DE5", "#F15BB5", "#FEE440"],
+        minimalist: ["#FFFFFF", "#F4F4F5", "#D4D4D8", "#71717A", "#18181B"],
+        nature: ["#2D6A4F", "#40916C", "#74C69D", "#95D5B2", "#D8F3DC"],
+        ocean: ["#005F73", "#0A9396", "#94D2BD", "#E9D8A6", "#EE9B00"],
+        sunset: ["#FF7B54", "#FFB26B", "#FFD56F", "#939B62", "#4F772D"],
+        autumn: ["#9C6644", "#D4A373", "#E6B8A2", "#7F5539", "#B08968"],
+        corporate: ["#0B1F3A", "#1D4E89", "#3E7CB1", "#9DB4C0", "#D9E2EC"],
+        tropical: ["#06D6A0", "#FFD166", "#EF476F", "#118AB2", "#073B4C"],
+      };
+
+      applyConfig();
+      renderResources();
+      renderSubscriberUI();
+
+      function loadConfig() {
+        try {
+          return {
+            ...defaultConfig,
+            ...(JSON.parse(localStorage.getItem("paletteAdminConfig")) || {}),
+          };
+        } catch (e) {
+          return { ...defaultConfig };
+        }
+      }
+
+      function saveConfigToStorage() {
+        localStorage.setItem("paletteAdminConfig", JSON.stringify(config));
+      }
+
+      function renderSubscriberUI() {
+        const stats = document.getElementById("subscriberStats");
+        const status = document.getElementById("signupStatus");
+        const endpoint = document.getElementById("cfgSubscriptionEndpoint");
+        const audience = document.getElementById("cfgMailchimpAudienceName");
+        const tag = document.getElementById("cfgMailchimpTag");
+        const envBox = document.getElementById("cfgMailchimpEnv");
+
+        if (stats) {
+          stats.textContent = `Mailchimp via Netlify • ${config.mailchimpAudienceName || "YOUR_MAILCHIMP_AUDIENCE_NAME"}`;
+        }
+
+        if (endpoint) endpoint.value = config.subscriptionEndpoint || "";
+        if (audience) audience.value = config.mailchimpAudienceName || "";
+        if (tag) tag.value = config.mailchimpTag || "";
+        if (envBox) {
+          envBox.value = [
+            "MAILCHIMP_API_KEY=YOUR_MAILCHIMP_API_KEY",
+            "MAILCHIMP_SERVER_PREFIX=usX",
+            "MAILCHIMP_AUDIENCE_ID=YOUR_MAILCHIMP_AUDIENCE_ID",
+          ].join("\n");
+        }
+        if (status && !status.textContent.trim()) {
+          status.className = "signup-status";
+        }
+      }
+
+      function setSignupStatus(message, type = "info") {
+        const status = document.getElementById("signupStatus");
+        if (!status) return;
+
+        if (!message) {
+          status.textContent = "";
+          status.className = "signup-status";
+          return;
+        }
+
+        status.textContent = message;
+        status.className = `signup-status show ${type}`;
+      }
+
+      function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      async function subscribeEmail(event) {
+        event.preventDefault();
+        if (subscribeBusy) return;
+
+        const input = document.getElementById("subscriberEmail");
+        const button = document.getElementById("subscribeButton");
+        const email = input.value.trim().toLowerCase();
+
+        if (!isValidEmail(email)) {
+          setSignupStatus("Please enter a valid email address.", "error");
+          return toast("❌ Please enter a valid email address.");
+        }
+
+        subscribeBusy = true;
+        if (button) {
+          button.disabled = true;
+          button.textContent = "⏳ Subscribing...";
+        }
+        setSignupStatus("Submitting your signup to Mailchimp…", "info");
+
+        try {
+          const response = await fetch(config.subscriptionEndpoint, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email,
+              tags: config.mailchimpTag ? [config.mailchimpTag] : [],
+              audienceName: config.mailchimpAudienceName,
+              source: window.location.hostname || "netlify-site",
+            }),
+          });
+
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok) {
+            throw new Error(
+              data.message ||
+                "Subscription failed. Check your Netlify function and Mailchimp configuration.",
+            );
+          }
+
+          input.value = "";
+          setSignupStatus(data.message || config.mailchimpSuccessMessage, "ok");
+          toast("✅ Subscription submitted to Mailchimp.");
+        } catch (error) {
+          setSignupStatus(
+            error.message ||
+              "Subscription failed. Check your Netlify function and Mailchimp configuration.",
+            "error",
+          );
+          toast("❌ Subscription failed.");
+        } finally {
+          subscribeBusy = false;
+          if (button) {
+            button.disabled = false;
+            button.textContent = "Subscribe";
+          }
+        }
+      }
+
+      function applyConfig() {
+        setText("siteTitle", config.title);
+        setText("siteSubtitle", config.subtitle);
+        setText("topAdTitle", config.topAdTitle);
+        setText("topAdText", config.topAdText);
+        setText("sideAd1Title", config.sideAd1Title);
+        setText("sideAd1Text", config.sideAd1Text);
+        setText("sideAd2Title", config.sideAd2Title);
+        setText("sideAd2Text", config.sideAd2Text);
+        setText("bottomAdTitle", config.bottomAdTitle);
+        setText("bottomAdText", config.bottomAdText);
+
+        const heroImage = document.getElementById("heroImage");
+        const heroPlaceholder = document.getElementById("heroPlaceholder");
+
+        if (config.heroImage && config.heroImage.trim()) {
+          heroImage.src = config.heroImage.trim();
+          heroImage.style.display = "block";
+          heroPlaceholder.style.display = "none";
+        } else {
+          heroImage.removeAttribute("src");
+          heroImage.style.display = "none";
+          heroPlaceholder.style.display = "block";
+        }
+
+        renderSubscriberUI();
+      }
+
+      function renderResources() {
+        const grid = document.getElementById("resourceGrid");
+        grid.innerHTML = "";
+        (config.resources || []).forEach((item) => {
+          const a = document.createElement("a");
+          a.className = "resource-card";
+          a.href = item.url || "#";
+          a.target = "_blank";
+          a.rel = "sponsored noopener";
+          a.innerHTML = `
+                <span class="badge">Ad</span>
+                <h3>${item.emoji || "🔗"} ${escapeHtml(item.title || "Resource")}</h3>
+                <p>${escapeHtml(item.desc || "")}</p>
+              `;
+          grid.appendChild(a);
+        });
+      }
+
+      function setText(id, value) {
+        document.getElementById(id).textContent = value || "";
+      }
+
+      function switchTab(tab, btn) {
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((el) => el.classList.remove("active"));
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((el) => el.classList.remove("active"));
+        document.getElementById(tab + "-tab").classList.add("active");
+        btn.classList.add("active");
+      }
+
+      function previewImage(input) {
+        const file = input.files && input.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const img = new Image();
+          img.onload = function () {
+            const canvas = document.getElementById("imageCanvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            toast("✅ Image loaded successfully.");
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function generateFromImage() {
+        const canvas = document.getElementById("imageCanvas");
+        if (!canvas.width) {
+          toast("⚠️ Please upload an image first.");
+          return;
+        }
+        const ctx = canvas.getContext("2d");
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const colors = extractDominantColors(imageData);
+        displayPalette(colors);
+        toast("🎉 Colors extracted from the image.");
+      }
+
+      function extractDominantColors(imageData) {
+        const map = {};
+        const data = imageData.data;
+        for (let i = 0; i < data.length; i += 40) {
+          const r = data[i],
+            g = data[i + 1],
+            b = data[i + 2];
+          if ((r > 245 && g > 245 && b > 245) || (r < 10 && g < 10 && b < 10))
+            continue;
+          const key = `${Math.floor(r / 16)},${Math.floor(g / 16)},${Math.floor(b / 16)}`;
+          map[key] = (map[key] || 0) + 1;
+        }
+        const top = Object.entries(map)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 5)
+          .map(([k]) => k);
+        return top.map((k) => {
+          const [r, g, b] = k
+            .split(",")
+            .map((v) => Math.min(255, parseInt(v) * 16));
+          return rgbToHex(r, g, b);
+        });
+      }
+
+      function selectMood(btn, mood) {
+        document
+          .querySelectorAll("#moodGrid .pick")
+          .forEach((el) => el.classList.remove("selected"));
+        btn.classList.add("selected");
+        selectedMood = mood;
+      }
+
+      function generateFromMood() {
+        if (!selectedMood) return toast("⚠️ Please select a mood first.");
+        displayPalette(moodPalettes[selectedMood]);
+        toast("🎉 Mood palette generated.");
+      }
+
+      function selectTheme(btn, theme) {
+        document
+          .querySelectorAll("#themeGrid .pick")
+          .forEach((el) => el.classList.remove("selected"));
+        btn.classList.add("selected");
+        selectedTheme = theme;
+      }
+
+      function generateFromTheme() {
+        if (!selectedTheme) return toast("⚠️ Please select a theme first.");
+        displayPalette(themePalettes[selectedTheme]);
+        toast("🎉 Theme palette generated.");
+      }
+
+      function generateFromText() {
+        const val = document.getElementById("textInput").value.trim();
+        if (!val) return toast("⚠️ Please enter text or hex colors.");
+        const hexMatches = val.match(/#[0-9A-Fa-f]{6}/g);
+        if (hexMatches && hexMatches.length) {
+          displayPalette(hexMatches.slice(0, 5));
+          return toast("🎉 Palette generated from hex values.");
+        }
+        displayPalette(generateColorsFromText(val));
+        toast("🎉 Palette generated from text.");
+      }
+
+      function generateColorsFromText(text) {
+        const colors = [];
+        for (let i = 0; i < 5; i++) {
+          const hash = hashCode(text + i);
+          colors.push(
+            "#" + ((hash & 0xffffff) >>> 0).toString(16).padStart(6, "0"),
+          );
+        }
+        return colors;
+      }
+
+      function hashCode(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+          hash = (hash << 5) - hash + str.charCodeAt(i);
+          hash |= 0;
+        }
+        return Math.abs(hash);
+      }
+
+      function displayPalette(colors) {
+        basePalette = [...colors];
+        currentPalette = [...colors];
+        const wrap = document.getElementById("paletteWrap");
+        const grid = document.getElementById("paletteGrid");
+        grid.innerHTML = "";
+
+        colors.forEach((hex, i) => {
+          const card = document.createElement("div");
+          card.className = "color-card";
+          card.innerHTML = `
+                <div class="swatch" id="swatch-${i}" style="background:${hex}" onclick="copyColor('${hex}')"></div>
+                <div class="color-meta">
+                  <div class="hex" id="hex-${i}">${hex}</div>
+                  <button class="mini-btn" onclick="copyCurrentColor(${i})">📋 Copy</button>
+                  <div class="sliders">
+
+                    <div class="slider-row">
+                      <label><span>Hue</span><span id="hue-value-${i}">0°</span></label>
+                      <input type="range" min="-180" max="180" value="0" oninput="adjustColor(${i})" id="hue-${i}" />
+                    </div>
+
+                    <div class="slider-row">
+                      <label><span>Saturation</span><span id="sat-value-${i}">0%</span></label>
+                      <input type="range" min="-100" max="100" value="0" oninput="adjustColor(${i})" id="sat-${i}" />
+                    </div>
+
+                    <div class="slider-row">
+                      <label><span>Lightness</span><span id="light-value-${i}">0%</span></label>
+                      <input type="range" min="-100" max="100" value="0" oninput="adjustColor(${i})" id="light-${i}" />
+                    </div>
+
+                  </div>
+                </div>
+              `;
+          grid.appendChild(card);
+
+          // Reset sliders to 0 after rendering
+          setTimeout(() => {
+            document.getElementById(`hue-${i}`).value = 0;
+            document.getElementById(`sat-${i}`).value = 0;
+            document.getElementById(`light-${i}`).value = 0;
+          }, 0);
+        });
+
+        wrap.style.display = "block";
+        wrap.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function adjustColor(i) {
+        const hue = parseInt(document.getElementById(`hue-${i}`).value, 10);
+        const sat = parseInt(document.getElementById(`sat-${i}`).value, 10);
+        const light = parseInt(document.getElementById(`light-${i}`).value, 10);
+
+        const base = hexToHSL(basePalette[i]);
+
+        const newHue = (base.h + hue + 360) % 360;
+        const newSat = clamp(base.s + sat, 0, 100);
+        const newLight = clamp(base.l + light, 0, 100);
+
+        const next = hslToHex(newHue, newSat, newLight);
+
+        currentPalette[i] = next;
+
+        document.getElementById(`swatch-${i}`).style.background = next;
+        document.getElementById(`hex-${i}`).textContent = next;
+
+        document.getElementById(`hue-value-${i}`).textContent = hue + "°";
+        document.getElementById(`sat-value-${i}`).textContent = sat + "%";
+        document.getElementById(`light-value-${i}`).textContent = light + "%";
+      }
+
+      function clamp(v, min, max) {
+        return Math.max(min, Math.min(max, v));
+      }
+
+      function copyColor(hex) {
+        navigator.clipboard
+          .writeText(hex)
+          .then(() => toast(`✅ ${hex} copied.`));
+      }
+
+      function copyCurrentColor(i) {
+        copyColor(currentPalette[i]);
+      }
+
+      function copyAllColors() {
+        navigator.clipboard
+          .writeText(currentPalette.join(", "))
+          .then(() => toast("✅ All colors copied."));
+      }
+
+      function savePaletteAsImage() {
+        if (!currentPalette.length)
+          return toast("⚠️ Generate a palette first.");
+        const canvas = document.createElement("canvas");
+        canvas.width = 1200;
+        canvas.height = 320;
+        const ctx = canvas.getContext("2d");
+        const block = canvas.width / currentPalette.length;
+        currentPalette.forEach((c, i) => {
+          ctx.fillStyle = c;
+          ctx.fillRect(i * block, 0, block, 240);
+          ctx.fillStyle = "#111827";
+          ctx.font = "bold 26px Arial";
+          ctx.fillText(c, i * block + 24, 285);
+        });
+        canvas.toBlob((blob) => downloadBlob(blob, "color-palette.png"));
+        toast("✅ Palette image downloaded.");
+      }
+
+      function downloadColorsJSON() {
+        downloadBlob(
+          new Blob(
+            [
+              JSON.stringify(
+                {
+                  palette: currentPalette,
+                  createdAt: new Date().toISOString(),
+                  totalColors: currentPalette.length,
+                },
+                null,
+                2,
+              ),
+            ],
+            { type: "application/json" },
+          ),
+          "color-palette.json",
+        );
+        toast("✅ JSON downloaded.");
+      }
+
+      function downloadColorsCSS() {
+        let css = "/* Generated by AI Color Palette Generator */\\n:root {\\n";
+        currentPalette.forEach(
+          (c, i) => (css += `  --color-${i + 1}: ${c};\\n`),
+        );
+        css += "}\\n";
+        downloadBlob(
+          new Blob([css], { type: "text/css" }),
+          "color-palette.css",
+        );
+        toast("✅ CSS downloaded.");
+      }
+
+      function downloadColorsSCSS() {
+        let scss = "// Generated by AI Color Palette Generator\\n";
+        currentPalette.forEach((c, i) => (scss += `$color-${i + 1}: ${c};\\n`));
+        scss += "\\n$palette: (\\n";
+        currentPalette.forEach(
+          (c, i) =>
+            (scss += `  color-${i + 1}: ${c}${i < currentPalette.length - 1 ? "," : ""}\\n`),
+        );
+        scss += ");\\n";
+        downloadBlob(
+          new Blob([scss], { type: "text/plain" }),
+          "color-palette.scss",
+        );
+        toast("✅ SCSS downloaded.");
+      }
+
+      function downloadColorsTXT() {
+        let txt = "Color Palette\\n============\\n\\n";
+        txt += "Generated: " + new Date().toLocaleString() + "\\n\\n";
+        currentPalette.forEach((c, i) => (txt += `${i + 1}. ${c}\\n`));
+        downloadBlob(
+          new Blob([txt], { type: "text/plain" }),
+          "color-palette.txt",
+        );
+        toast("✅ TXT downloaded.");
+      }
+
+      function downloadBlob(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 500);
+      }
+
+      function generateRandom() {
+        const colors = Array.from(
+          { length: 5 },
+          () =>
+            "#" +
+            Math.floor(Math.random() * 16777215)
+              .toString(16)
+              .padStart(6, "0"),
+        );
+        displayPalette(colors);
+        toast("🎲 Random palette generated.");
+      }
+
+      function scrollToDownloads() {
+        document
+          .getElementById("downloads")
+          .scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function rgbToHex(r, g, b) {
+        return (
+          "#" + [r, g, b].map((v) => v.toString(16).padStart(2, "0")).join("")
+        );
+      }
+
+      function hexToHSL(hex) {
+        const res = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        let r = parseInt(res[1], 16) / 255;
+        let g = parseInt(res[2], 16) / 255;
+        let b = parseInt(res[3], 16) / 255;
+        const max = Math.max(r, g, b),
+          min = Math.min(r, g, b);
+        let h,
+          s,
+          l = (max + min) / 2;
+        if (max === min) {
+          h = s = 0;
+        } else {
+          const d = max - min;
+          s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+          switch (max) {
+            case r:
+              h = (g - b) / d + (g < b ? 6 : 0);
+              break;
+            case g:
+              h = (b - r) / d + 2;
+              break;
+            default:
+              h = (r - g) / d + 4;
+              break;
+          }
+          h /= 6;
+        }
+        return {
+          h: Math.round(h * 360),
+          s: Math.round(s * 100),
+          l: Math.round(l * 100),
+        };
+      }
+
+      function hslToHex(h, s, l) {
+        h /= 360;
+        s /= 100;
+        l /= 100;
+        let r, g, b;
+        if (s === 0) {
+          r = g = b = l;
+        } else {
+          const hue2rgb = (p, q, t) => {
+            if (t < 0) t += 1;
+            if (t > 1) t -= 1;
+            if (t < 1 / 6) return p + (q - p) * 6 * t;
+            if (t < 1 / 2) return q;
+            if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+            return p;
+          };
+          const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+          const p = 2 * l - q;
+          r = hue2rgb(p, q, h + 1 / 3);
+          g = hue2rgb(p, q, h);
+          b = hue2rgb(p, q, h - 1 / 3);
+        }
+        return rgbToHex(
+          Math.round(r * 255),
+          Math.round(g * 255),
+          Math.round(b * 255),
+        );
+      }
+
+      function toast(msg) {
+        const el = document.createElement("div");
+        el.className = "toast";
+        el.textContent = msg;
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 2600);
+      }
+
+      function openAdminPanel() {
+        document.getElementById("adminModal").classList.add("show");
+        fillAdminFields();
+      }
+
+      function closeAdminPanel() {
+        document.getElementById("adminModal").classList.remove("show");
+      }
+
+      function adminLogin() {
+        const user = document.getElementById("adminUser").value.trim();
+        const pass = document.getElementById("adminPass").value;
+        if (user === config.adminUser && pass === config.adminPass) {
+          isAdminLoggedIn = true;
+          document.getElementById("adminLoginView").style.display = "none";
+          document.getElementById("adminSettingsView").style.display = "block";
+          fillAdminFields();
+          toast("✅ Admin login successful.");
+        } else {
+          toast("❌ Invalid admin credentials.");
+        }
+      }
+
+      function adminLogout() {
+        isAdminLoggedIn = false;
+        document.getElementById("adminSettingsView").style.display = "none";
+        document.getElementById("adminLoginView").style.display = "block";
+        document.getElementById("adminUser").value = "";
+        document.getElementById("adminPass").value = "";
+        toast("👋 Logged out.");
+      }
+
+      function fillAdminFields() {
+        document.getElementById("cfgTitle").value = config.title || "";
+        document.getElementById("cfgSubtitle").value = config.subtitle || "";
+        document.getElementById("cfgHeroImage").value = config.heroImage || "";
+        document.getElementById("cfgTopAdTitle").value =
+          config.topAdTitle || "";
+        document.getElementById("cfgTopAdText").value = config.topAdText || "";
+        document.getElementById("cfgSide1Title").value =
+          config.sideAd1Title || "";
+        document.getElementById("cfgSide1Text").value =
+          config.sideAd1Text || "";
+        document.getElementById("cfgSide2Title").value =
+          config.sideAd2Title || "";
+        document.getElementById("cfgSide2Text").value =
+          config.sideAd2Text || "";
+        document.getElementById("cfgBottomTitle").value =
+          config.bottomAdTitle || "";
+        document.getElementById("cfgBottomText").value =
+          config.bottomAdText || "";
+        document.getElementById("cfgSubscriptionEndpoint").value =
+          config.subscriptionEndpoint || "";
+        document.getElementById("cfgMailchimpAudienceName").value =
+          config.mailchimpAudienceName || "";
+        document.getElementById("cfgMailchimpTag").value =
+          config.mailchimpTag || "";
+        document.getElementById("cfgResources").value = JSON.stringify(
+          config.resources || [],
+          null,
+          2,
+        );
+        document.getElementById("cfgNewUser").value = config.adminUser || "";
+        document.getElementById("cfgNewPass").value = config.adminPass || "";
+      }
+
+      function saveAdminConfig() {
+        if (!isAdminLoggedIn) return toast("⚠️ Login as admin first.");
+        try {
+          const resources = JSON.parse(
+            document.getElementById("cfgResources").value || "[]",
+          );
+          config = {
+            ...config,
+            title: document.getElementById("cfgTitle").value.trim(),
+            subtitle: document.getElementById("cfgSubtitle").value.trim(),
+            heroImage: document.getElementById("cfgHeroImage").value.trim(),
+            topAdTitle: document.getElementById("cfgTopAdTitle").value.trim(),
+            topAdText: document.getElementById("cfgTopAdText").value.trim(),
+            sideAd1Title: document.getElementById("cfgSide1Title").value.trim(),
+            sideAd1Text: document.getElementById("cfgSide1Text").value.trim(),
+            sideAd2Title: document.getElementById("cfgSide2Title").value.trim(),
+            sideAd2Text: document.getElementById("cfgSide2Text").value.trim(),
+            bottomAdTitle: document
+              .getElementById("cfgBottomTitle")
+              .value.trim(),
+            bottomAdText: document.getElementById("cfgBottomText").value.trim(),
+            subscriptionEndpoint:
+              document.getElementById("cfgSubscriptionEndpoint").value.trim() ||
+              "/.netlify/functions/mailchimp-subscribe",
+            mailchimpAudienceName:
+              document
+                .getElementById("cfgMailchimpAudienceName")
+                .value.trim() || "YOUR_MAILCHIMP_AUDIENCE_NAME",
+            mailchimpTag: document
+              .getElementById("cfgMailchimpTag")
+              .value.trim(),
+            resources,
+            adminUser:
+              document.getElementById("cfgNewUser").value.trim() || "admin",
+            adminPass:
+              document.getElementById("cfgNewPass").value || "palette123",
+          };
+          saveConfigToStorage();
+          applyConfig();
+          renderResources();
+          renderSubscriberUI();
+          toast("✅ Admin settings saved.");
+        } catch (e) {
+          toast("❌ Invalid resources JSON.");
+        }
+      }
+
+      function resetAdminConfig() {
+        config = { ...defaultConfig };
+        saveConfigToStorage();
+        applyConfig();
+        renderResources();
+        renderSubscriberUI();
+        fillAdminFields();
+        toast("♻️ Reset to default settings.");
+      }
+
+      function escapeHtml(str) {
+        return String(str).replace(
+          /[&<>\"']/g,
+          (s) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[s],
+        );
+      }
+
+      document
+        .getElementById("adminModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeAdminPanel();
+        });
+    </script>
+  </body>
+</html>
